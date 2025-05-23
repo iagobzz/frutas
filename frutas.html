@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciador de Frutas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      font-size: 16px;
+    }
+    .frutas {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .frutas span {
+      display: inline-block;
+      background: #e0ffe0;
+      margin: 3px;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Gerenciador de Frutas</h2>
+
+    <input type="text" id="novaFruta" placeholder="Digite o nome da fruta">
+    <button onclick="incluirFruta()">Incluir Fruta</button>
+
+    <input type="text" id="frutaExcluir" placeholder="Digite a fruta para excluir">
+    <button onclick="excluirFruta()">Excluir Fruta</button>
+
+    <button onclick="ordenarFrutas()">Ordenar Frutas (A-Z)</button>
+
+    <div class="frutas" id="listaFrutas">
+      <!-- Frutas aparecerão aqui -->
+    </div>
+  </div>
+
+  <script>
+    let frutas = ["maçã", "banana", "laranja"];
+
+    function mostrarFrutas() {
+      const lista = document.getElementById("listaFrutas");
+      lista.innerHTML = "Frutas: " + frutas.map(fruta => `<span>${fruta}</span>`).join(" ");
+    }
+
+    function incluirFruta() {
+      const novaFruta = document.getElementById("novaFruta").value.trim().toLowerCase();
+      if (novaFruta) {
+        frutas.push(novaFruta);
+        document.getElementById("novaFruta").value = "";
+        mostrarFrutas();
+      }
+    }
+
+    function excluirFruta() {
+      const frutaExcluir = document.getElementById("frutaExcluir").value.trim().toLowerCase();
+      frutas = frutas.filter(fruta => fruta !== frutaExcluir);
+      document.getElementById("frutaExcluir").value = "";
+      mostrarFrutas();
+    }
+
+    function ordenarFrutas() {
+      frutas.sort();
+      mostrarFrutas();
+    }
+
+   
+    mostrarFrutas();
+  </script>
+</body>
+</html>
